@@ -2,7 +2,7 @@ import Container from "react-bootstrap/esm/Container";
 import Table from "react-bootstrap/Table";
 import Navbar from "../components/Navbar";
 import DataUsers from "../assets/datas/DataUser";
-import magnifiyIc from "../images/magnifiyIc.svg";
+import magnifiyIc from "../assets/images/magnifiyIc.svg";
 import { useEffect } from "react";
 
 function HomeOwner(props) {

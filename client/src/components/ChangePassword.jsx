@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 
 export default function ChangePassword(props) {
   return (
-    <Modal {...props} size="sm" aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Body className="m-4">
       <h3 className="fw-bold text-center">Change Password</h3>
         <Form.Group className="mb-3" controlId="password">

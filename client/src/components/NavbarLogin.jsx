@@ -2,7 +2,7 @@ import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import { Row, Col, Form, Button, InputGroup,Navbar,Container } from 'react-bootstrap';
 import { CiSearch } from 'react-icons/ci';
-import Logo from '../images/Icon.svg';
+import Logo from '../assets/images/Icon.svg';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import DropDown from './DropDown';

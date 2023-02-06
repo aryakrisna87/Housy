@@ -6,9 +6,10 @@ type UserResponse struct {
 	Username   string `json:"username"`
 	Email      string `json:"email"`
 	Password   string `json:"password"`
-	ListAsRole string `json:"listasrole" gorm:"type: varchar(225)"`
+	ListAsRole string `json:"listAsRole" gorm:"type: varchar(225)"`
 	Gender     string `json:"gender"`
 	Phone      string `json:"phone"`
 	Address    string `json:"address"`
 	Image      string `json:"image"`
+	Token      string `json:"token"`
 }

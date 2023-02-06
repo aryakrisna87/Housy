@@ -1,11 +1,11 @@
 import { Table, Container, Modal } from "react-bootstrap"
-import Logo from "../images/Icon.svg";
-import Bukti from "../images/Bukti.jpg";
+import Logo from "../assets/images/Icon.svg";
+import Bukti from "../assets/images/Bukti.jpg";
 import Navbar from "../components/Navbar";
 // import { useState } from "react"
-import Kosong from "../images/kosong.jpg";
-import Isi from "../images/isi.jpg";
-import Garis from "../images/garis.jpg";
+import Kosong from "../assets/images/kosong.jpg";
+import Isi from "../assets/images/isi.jpg";
+import Garis from "../assets/images/garis.jpg";
 
 
 

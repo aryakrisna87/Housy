@@ -61,7 +61,6 @@ func (h *handlerAuth) SignUp(w http.ResponseWriter, r *http.Request) {
 		Gender:     request.Gender,
 		Phone:      request.Phone,
 		Address:    request.Address,
-		Image:      request.Image,
 	}
 
 	data, err := h.AuthRepository.SignUp(user)
@@ -72,10 +71,16 @@ func (h *handlerAuth) SignUp(w http.ResponseWriter, r *http.Request) {
 	}
 
 	signUpResponse := authdto.SignUpResponse{
+		ID:         data.ID,
 		Username:   data.Username,
-		Message:    "Successfully Sign Up!",
+		Fullname:   data.Fullname,
+		Email:      data.Email,
 		Password:   data.Password,
+		Gender:     data.Gender,
+		Phone:      data.Phone,
 		ListAsRole: data.ListAsRole,
+		Address:    data.Address,
+		Message:    "Successfully Sign Up!",
 	}
 
 	w.WriteHeader(http.StatusOK)
@@ -95,8 +100,9 @@ func (h *handlerAuth) SignIn(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user := models.User{
-		Username: request.Username,
-		Password: request.Password,
+		Username:   request.Username,
+		Password:   request.Password,
+		ListAsRole: request.ListAsRole,
 	}
 
 	// Check username
@@ -130,12 +136,47 @@ func (h *handlerAuth) SignIn(w http.ResponseWriter, r *http.Request) {
 	}
 
 	signInResponse := authdto.SignInResponse{
-		Username: request.Username,
-		Token:    token,
+		ID:         user.ID,
+		Fullname:   user.Fullname,
+		Email:      user.Email,
+		Username:   user.Username,
+		ListAsRole: user.ListAsRole,
+		Password:   user.Password,
+		Gender:     user.Gender,
+		Phone:      user.Phone,
+		Address:    user.Address,
+		Token:      token,
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	response := dto.SuccessResult{Code: http.StatusOK, Data: signInResponse}
 	json.NewEncoder(w).Encode(response)
 
+}
+
+func (h *handlerAuth) CheckAuth(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
+	userId := int(userInfo["id"].(float64))
+
+	// Check User by Id
+	user, err := h.AuthRepository.Getuser(userId)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
+		json.NewEncoder(w).Encode(response)
+		return
+	}
+
+	CheckAuthResponse := authdto.CheckAuthResponse{
+		ID:         user.ID,
+		Fullname:   user.Fullname,
+		Email:      user.Email,
+		ListAsRole: user.ListAsRole,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	response := dto.SuccessResult{Code: http.StatusOK, Data: CheckAuthResponse}
+	json.NewEncoder(w).Encode(response)
 }

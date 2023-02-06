@@ -11,6 +11,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gorilla/mux"
+	"gorm.io/datatypes"
 )
 
 var path_file = "http://localhost:5000/uploads/"
@@ -34,7 +35,7 @@ func (h *handlerHouse) FindHouses(w http.ResponseWriter, r *http.Request) {
 
 	for i, p := range houses {
 		houses[i].Image = path_file + p.Image
-	  }
+	}
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: houses}
@@ -79,7 +80,7 @@ func (h *handlerHouse) CreateHouse(w http.ResponseWriter, r *http.Request) {
 		CityName:  r.FormValue("cityname"),
 		Address:   r.FormValue("address"),
 		TypeRent:  r.FormValue("type_rent"),
-		Amenities: r.FormValue("amenities"),
+		Amenities: datatypes.JSON(r.FormValue("amenities")),
 		Image:     r.FormValue("image"),
 		Bedroom:   Bedroom,
 		Price:     price,
@@ -163,7 +164,7 @@ func (h *handlerHouse) UpdateHouse(w http.ResponseWriter, r *http.Request) {
 		CityName:  r.FormValue("cityname"),
 		Address:   r.FormValue("address"),
 		TypeRent:  r.FormValue("type_rent"),
-		Amenities: r.FormValue("amenities"),
+		Amenities: datatypes.JSON(r.FormValue("amenities")),
 		Price:     price,
 		Bedroom:   bedroom,
 		Bathroom:  bathroom,
@@ -199,7 +200,7 @@ func (h *handlerHouse) UpdateHouse(w http.ResponseWriter, r *http.Request) {
 		house.TypeRent = request.TypeRent
 	}
 
-	if request.Amenities != "" {
+	if request.Amenities != nil {
 		house.Amenities = request.Amenities
 	}
 

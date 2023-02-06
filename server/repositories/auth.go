@@ -9,6 +9,7 @@ import (
 type AuthRepository interface {
 	SignUp(user models.User) (models.User, error)
 	SignIn(username string) (models.User, error)
+	Getuser(ID int) (models.User, error)
 }
 
 func RepositoryAuth(db *gorm.DB) *repository {
@@ -26,4 +27,11 @@ func (r *repository) SignIn(username string) (models.User, error) {
 	err := r.db.Where("username = ?", username).First(&user).Error
 
 	return user, err
+}
+
+func (r *repository) Getuser(ID int) (models.User, error) {
+	var user models.User
+	err := r.db.First(&user, ID).Error
+
+	return user, err 
 }

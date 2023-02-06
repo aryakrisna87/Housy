@@ -2,6 +2,8 @@ package models
 
 import (
 	"time"
+
+	"gorm.io/datatypes"
 )
 
 // House model struct
@@ -12,7 +14,7 @@ type House struct {
 	Address   string    `json:"address" gorm:"type: text"`
 	Price     int       `json:"price" gorm:"type: int"`
 	TypeRent  string    `json:"type_rent" gorm:"type: varchar(255)"`
-	Amenities string    `json:"amenities" gorm:"type: varchar(255)"`
+	Amenities datatypes.JSON    `json:"amenities" gorm:"type: json"`
 	Bedroom   int       `json:"bedroom" gorm:"type: int"`
 	Bathroom  int       `json:"bathroom" gorm:"type: int"`
 	Image     string    `json:"image" gorm:"type: varchar(255)"`

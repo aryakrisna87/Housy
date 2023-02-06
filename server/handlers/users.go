@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-playground/validator/v10"
+	// "github.com/go-playground/validator/v10"
 	"github.com/gorilla/mux"
 )
 
@@ -54,49 +54,50 @@ func (h *handlerUser) GetUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-func (h *handlerUser) CreateUser(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+// func (h *handlerUser) CreateUser(w http.ResponseWriter, r *http.Request) {
+// 	w.Header().Set("Content-Type", "application/json")
 
-	request := new(usersdto.RequestUser)
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
-		json.NewEncoder(w).Encode(response)
-		return
-	}
+// 	request := new(usersdto.RequestUser)
+// 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+// 		w.WriteHeader(http.StatusBadRequest)
+// 		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
+// 		json.NewEncoder(w).Encode(response)
+// 		return
+// 	}
 
-	validation := validator.New()
-	err := validation.Struct(request)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
-		json.NewEncoder(w).Encode(response)
-		return
-	}
+// 	validation := validator.New()
+// 	err := validation.Struct(request)
+// 	if err != nil {
+// 		w.WriteHeader(http.StatusBadRequest)
+// 		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
+// 		json.NewEncoder(w).Encode(response)
+// 		return
+// 	}
 
-	user := models.User{
-		Fullname:   request.Fullname,
-		Username:   request.Username,
-		Email:      request.Email,
-		Password:   request.Password,
-		ListAsRole: request.ListAsRole,
-		Gender:     request.Gender,
-		Phone:      request.Phone,
-		Address:    request.Address,
-		Image:      request.Image,
-	}
+// 	user := models.User{
+// 		ID: ,
+// 		Fullname:   request.Fullname,
+// 		Username:   request.Username,
+// 		Email:      request.Email,
+// 		Password:   request.Password,
+// 		ListAsRole: request.ListAsRole,
+// 		Gender:     request.Gender,
+// 		Phone:      request.Phone,
+// 		Address:    request.Address,
+// 		// Image:      request.Image,
+// 	}
 
-	data, err := h.UserRepository.CreateUser(user)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		response := dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()}
-		json.NewEncoder(w).Encode(response)
-	}
+// 	data, err := h.UserRepository.CreateUser(user)
+// 	if err != nil {
+// 		w.WriteHeader(http.StatusInternalServerError)
+// 		response := dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()}
+// 		json.NewEncoder(w).Encode(response)
+// 	}
 
-	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponse(data)}
-	json.NewEncoder(w).Encode(response)
-}
+// 	w.WriteHeader(http.StatusOK)
+// 	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponse(data)}
+// 	json.NewEncoder(w).Encode(response)
+// }
 
 func (h *handlerUser) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -158,9 +159,9 @@ func (h *handlerUser) UpdateUser(w http.ResponseWriter, r *http.Request) {
 		user.Address = request.Address
 	}
 
-	if request.Image != "" {
-		user.Image = request.Image
-	}
+	// if request.Image != "" {
+	// 	user.Image = request.Image
+	// }
 
 	data, err := h.UserRepository.UpdateUser(user, id)
 	if err != nil {
@@ -186,7 +187,6 @@ func convertResponse(u models.User) usersdto.UserResponse {
 		Gender:     u.Gender,
 		Phone:      u.Phone,
 		Address:    u.Address,
-		Image:      u.Image,
 	}
 }
 

@@ -1,14 +1,14 @@
 import { Container, Button, Col, Row } from "react-bootstrap"
-import Logo from "../images/Icon.svg";
-// import Bukti from "../images/Bukti.jpg";
+import Logo from "../assets/images/Icon.svg";
+// import Bukti from "../assets/images/Bukti.jpg";
 import Navbar from "../components/Navbar";
 import "../style/style.css"
 
 // import { useState } from "react"
-import Kosong from "../images/kosong.jpg";
-import Isi from "../images/isi.jpg";
-import Garis from "../images/garis.jpg";
-import Qr from "../images/qr.jpg";
+import Kosong from "../assets/images/kosong.jpg";
+import Isi from "../assets/images/isi.jpg";
+import Garis from "../assets/images/garis.jpg";
+import Qr from "../assets/images/qr.jpg";
 import { useEffect } from "react";
 
 function MyBooking(props) {

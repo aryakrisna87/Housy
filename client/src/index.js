@@ -5,8 +5,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { UserContextProvider } from "./contex/userContex";
+import { UserContextProvider } from "../src/context/userContext";
 import { BrowserRouter } from "react-router-dom";
+
+const client = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

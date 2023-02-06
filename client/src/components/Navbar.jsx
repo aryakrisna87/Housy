@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { CiSearch } from 'react-icons/ci';
-import Logo from '../images/Icon.svg';
+import Logo from '../assets/images/Icon.svg';
 import Button from 'react-bootstrap/Button';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -15,15 +15,15 @@ import DropDown from './DropDown';
 
 
 function Navigate(props) {
-  const [signIn, setSignIn] = React.useState(false);
-  const [signUp, setSignUp] = React.useState(false);
+  const [modalSignIn, setModalSignIn] = React.useState(false);
+  const [modalSignUp, setModalSignUp] = React.useState(false);
 
   const handleSignup = () => {
-    setSignUp(true);
+    setModalSignUp(true);
   };
 
   const handleSignin = () => {
-    setSignIn(true);
+    setModalSignIn(true);
   };
 
   return (
@@ -50,10 +50,10 @@ function Navigate(props) {
         </Col>
         <Col className='d-flex align-items-center' >
           <Nav className='ms-auto'>
-          {!localStorage.getItem("UserSignIn") ? (
+          {!localStorage.getItem("token") ? (
             <> 
-            <Button className='fw-bold btn-light shadow-sm me-3' onClick={() => setSignIn(true)}>Sign in</Button>
-            <Button className='fw-bold btn-light shadow-sm me-3' onClick={() => setSignUp(true)}>Sign up</Button>
+            <Button className='fw-bold btn-light shadow-sm me-3' onClick={() => setModalSignIn(true)}>Sign in</Button>
+            <Button className='fw-bold btn-light shadow-sm me-3' onClick={() => setModalSignUp(true)}>Sign up</Button>
             </>
             ) : (
               <>
@@ -67,8 +67,8 @@ function Navigate(props) {
       </Navbar>
     </Container> 
     <SignIn  userSignIn = {props.userSignIn} setUserSignIn={props.setUserSignIn}
-      openSignup={handleSignup} show={signIn} onHide={() => setSignIn(false)} />
-    <SignUp openSignin={handleSignin} show={signUp} onHide={() => setSignUp(false)} />
+      openSignup={handleSignup} show={modalSignIn} onHide={() => setModalSignIn(false)} />
+    <SignUp openSignin={handleSignin} show={modalSignUp} onHide={() => setModalSignUp(false)} />
     </>
   );
 }
