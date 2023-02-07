@@ -10,6 +10,7 @@ import Isi from "../assets/images/isi.jpg";
 import Garis from "../assets/images/garis.jpg";
 // import { useEffect } from "react";
 import React from "react";
+// import rupiasConvert from convert-
 // import Bugis from "../images/bulatgaris.png";
 
 

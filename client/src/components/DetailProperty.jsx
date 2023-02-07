@@ -21,6 +21,7 @@ import Navbar from "../components/Navbar";
 import listData from "../assets/datas/data";
 import { useQuery } from "react-query";
 import { API } from "../config/api";
+import convertRupiah from "rupiah-format";
 
 function MyBookModal(props) {
     const { id } = useParams();
@@ -184,7 +185,9 @@ export default function DetailProperty(props) {
                         <div className="d-flex justify-content-between mb-5">
                             <Col sm={4}>
                                 <h3 className="fw-bold">
-                                    {detail?.price + " / " + detail?.type_rent}
+                                    {convertRupiah.convert(detail?.price) +
+                                        " / " +
+                                        detail?.type_rent}
                                 </h3>
                                 <p>
                                     Jl. Elang IV Perum Permata Bintaro
